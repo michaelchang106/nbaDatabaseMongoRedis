@@ -17,6 +17,7 @@ NBA database for DBMS Project 2 - CS 5200
 ### Heirarchal Model
 
 [NBA-HeiarchalTables-JSON-Examples](./BusReq_Heirarchal_tables/NBA-HeiarchalTables-JSON-Examples.pdf)
+[Heirarchal Model Lucid Chart] (https://lucid.app/lucidchart/e3295927-79f1-4176-bfd1-29a7fae585fe/edit?viewport_loc=-3080%2C-56%2C3328%2C1400%2C0_0&invitationId=inv_60206c0a-d083-4538-a24a-087f8aac8f4d)
 
 ### Heirarchal Model refactored from Logical model below
 [Logical Model Lucid Chart](https://lucid.app/lucidchart/f8b731fe-7480-4e96-b786-84ca747ef028/edit?viewport_loc=-303%2C16%2C2219%2C1012%2C0_0&invitationId=inv_b1efe1a2-5c17-497c-80c0-568e9ae0d801)
