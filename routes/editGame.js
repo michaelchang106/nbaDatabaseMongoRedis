@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const nbaDB = require("../database/nbaSQLiteDB.js");
+const nbaDB = require("../database/nbaDBMongoManager.js");
 
 /* POST home page. */
 router.post("/", async function (req, res, next) {
