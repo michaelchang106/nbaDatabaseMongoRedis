@@ -1,6 +1,8 @@
+//DANIEL LISKO
+
 const express = require("express");
 const router = express.Router();
-const myDB = require("../data/myMongoDB.js");
+const myDB = require("../database/myMongoDB.js");
 /* GET home page. */
 
 router.get("/", async function (req, res) {

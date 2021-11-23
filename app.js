@@ -1,4 +1,3 @@
-
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
@@ -9,7 +8,6 @@ const gamesRouter = require("./routes/games");
 const editGameRouter = require("./routes/editGame");
 const indexRouter = require("./routes/index");
 const employeesRouter = require("../nbaDatabaseMongoDB/routes/employees.js");
-
 
 const app = express();
 
@@ -28,8 +26,6 @@ app.use("/", indexRouter);
 app.use("/games", gamesRouter);
 app.use("/editGame", editGameRouter);
 app.use("/employees", employeesRouter);
-
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,3 +1,5 @@
+<!-- DANIEL LISKO -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -50,8 +52,8 @@
                 </div>
                 <div class="card-text">
                   <p class="card-text">
-                    <strong>Height: </strong> <%= Math.floor(f.attributes.height / 12)%>'
-                    <%= f.attributes.height % 12%>"
+                    <strong>Height: </strong> <%= Math.floor(f.attributes.height
+                    / 12)%>' <%= f.attributes.height % 12%>"
                   </p>
                   <p><strong>Weight:</strong> <%= f.attributes.weight %> lbs</p>
                   <p><strong>Jersey Number:</strong> <%= f. jerseyNum%></p>
@@ -62,13 +64,13 @@
                 <div class="row">
                   <div class="d-flex justify-content-end col-6">
                     <form action="/employees/deleteEmployee" method="POST">
+                      <input type="hidden" name="_id" value="<%= f._id%>" />
+
                       <input
                         type="hidden"
-                        name="_id"
-                        value="<%= f._id%>"
+                        name="team"
+                        value="<%= f.team.teamName%>"
                       />
-            
-                      <input type="hidden" name="team" value="<%= f.team.teamName%>" />
                       <button type="submit" class="btn btn-primary">
                         Delete
                       </button>
@@ -79,11 +81,7 @@
                   <div class="d-flex justify-content-start col-6">
                     <form action="/employees/edit" method="POST">
                       <input type="hidden" name="team" value="<%= f.team%>" />
-                      <input
-                        type="hidden"
-                        name="_id"
-                        value="<%= f._id%>"
-                      />
+                      <input type="hidden" name="_id" value="<%= f._id%>" />
                       <input
                         type="hidden"
                         name="firstName"

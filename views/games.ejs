@@ -1,3 +1,5 @@
+<!-- MICHAEL CHANG -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,7 +32,79 @@
         </nav>
 
         <h1>NBA GAMES CRUD</h1>
+        <!-- filter by game by Team or Date -->
+        <div class="row m-3 box border border-dark">
+          <h2>FILTER BY GAME</h2>
+          <div class="col">
+            <form action="/games/filterBy" method="post">
+              <label for="teamID">Choose a Team:</label>
+              <select name="teamID" id="teamID">
+                <% if(current.selectedTeam !== null){ %>
+                <option value="<%=current.selectedTeam%>" selected>
+                  <%=current.selectedTeam%>
+                </option>
+                <% } else{ %>
+                <option value="" selected>All Teams</option>
+                <% } %> <% teams.forEach((team) => { %>
+                <option value="<%=team.abbreviation%>">
+                  <%=team.abbreviation%> - <%=team.teamName%>
+                </option>
+                <% }) %>
+              </select>
+              <label for="date">Choose a Date:</label>
+              <select name="date" id="date">
+                <% if(current.selectedDate !== null){ %>
+                <option value="<%=current.selectedDate%>" selected>
+                  <%=current.selectedDate%>
+                </option>
+                <% } else{ %>
+                <option value="" selected>All Dates</option>
+                <% } %> <%allDates.forEach((date)=> {%>
+                <option value="<%=date%>"><%=date%></option>
+                <%})%>
+              </select>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
 
+        <!-- create a new Game -->
+        <div class="row m-3 box border border-dark">
+          <h2>ADD A GAME</h2>
+          <div class="col">
+            <form action="/games/insertGame" method="post">
+              <label for="homeTeam">Choose a Home Team:</label>
+              <select name="homeTeam" id="homeTeam">
+                <% teams.forEach((team) => { %>
+                <option value="<%=team.abbreviation%>">
+                  <%=team.abbreviation%> - <%=team.teamName%>
+                </option>
+                <% }) %>
+              </select>
+
+              <label for="awayTeam">Choose an Away Team:</label>
+              <select name="awayTeam" id="awayTeam">
+                <% teams.forEach((team) => { %>
+                <option value="<%=team.abbreviation%>">
+                  <%=team.abbreviation%> - <%=team.teamName%>
+                </option>
+                <% }) %>
+              </select>
+              <label for="date">Date of game:</label>
+              <input
+                name="date"
+                type="text"
+                placeholder="mm/dd/yyyy"
+                id="date"
+                min="10-19-2021"
+                max="06-30-2022"
+                required
+              />
+              <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+          </div>
+        </div>
+        <a href="/games">Refresh Games/Reset Filters</a>
         <!-- render the cards for the games -->
         <div class="row">
           <div class="m-2">
@@ -39,29 +113,126 @@
               <span class="text-danger">AWAY</span>)
             </h2>
           </div>
-
-          <% games.forEach(game=>{ %>
-          <div class="col-sm-6 col-md-4 col-lg-3">
+          <% games.forEach((game) => { %>
+          <div class="col-sm-6 col-md-4">
             <div class="card m-1">
               <div class="card-body">
                 <h6 class="card-title">
-                  <% console.log(game, game.homeTeam.teamName,
-                  game.awayTeam.teamName, game.date) %> 
                   <%= game.date %>
                   <br />
                   <span class="text-primary"
-                    ><%= game.homeTeam.abbreviation%> <%=
-                    game.homeTeam.teamName%>
+                    ><%= game.homeTeam.abbreviation%>
+                    <%=game.homeTeam.teamName%>
+                    <span class="text-dark">
+                      (<%=teamsWinsAndLosses[game.homeTeam.abbreviation].wins%>W-
+                      <%=teamsWinsAndLosses[game.homeTeam.abbreviation].losses%>L)</span
+                    >
                   </span>
                   VS.
                   <span class="text-danger"
-                    ><%=game.awayTeam.abbreviation%> <%=game.awayteam.teamName%>
+                    ><%=game.awayTeam.abbreviation%> <%=game.awayTeam.teamName%>
+                    <span class="text-dark">
+                      (<%=teamsWinsAndLosses[game.awayTeam.abbreviation].wins%>W-
+                      <%=teamsWinsAndLosses[game.awayTeam.abbreviation].losses%>L)</span
+                    >
                   </span>
                 </h6>
-                <% }) %>
+
+                <% if (game.winTeam !== null && game.winTeam.teamName ===
+                game.homeTeam.teamName) { %>
+                <h6 class="card-subtitle text-success">
+                  | Winner - <%= game.homeTeam.abbreviation%> | <%=
+                  game.winTeamPoints%> | <%= game.loseTeamPoints%> |
+                  <%=game.awayTeam.abbreviation%> - Loser |
+                </h6>
+                <% } else if (game.winTeam !== null && game.winTeam.teamName ===
+                game.awayTeam.teamName) { %>
+                <h6 class="card-subtitle text-success">
+                  | Winner - <%= game.awayTeam.abbreviation%> | <%=
+                  game.winTeamPoints%> | <%= game.loseTeamPoints%> |
+                  <%=game.homeTeam.abbreviation%> - Loser |
+                </h6>
+                <% } %>
+
+                <div class="row">
+                  <div class="col-6">
+                    <form action="/editGame" method="post">
+                      <input
+                        name="gameID"
+                        type="hidden"
+                        value="<%=game._id%>"
+                      />
+                      <input
+                        name="homeTeam"
+                        type="hidden"
+                        value="<%=game.homeTeam.abbreviation%>"
+                      />
+                      <input
+                        name="awayTeam"
+                        type="hidden"
+                        value="<%=game.awayTeam.abbreviation%>"
+                      />
+                      <input
+                        name="date"
+                        placehodler="mm-dd-yyyy"
+                        type="hidden"
+                        value="<%=game.date%>"
+                      />
+                      <input
+                        name="homeTeamPoints"
+                        type="hidden"
+                        value="<%=game.homeTeamPoints%>"
+                      />
+                      <input
+                        name="awayTeamPoints"
+                        type="hidden"
+                        value="<%=game.awayTeamPoints%>"
+                      />
+                      <input
+                        name="winTeamPoints"
+                        type="hidden"
+                        value="<%=game.winTeamPoints%>"
+                      />
+                      <input
+                        name="loseTeamPoints"
+                        type="hidden"
+                        value="<%=game.loseTeamPoints%>"
+                      />
+                      <input
+                        name="attendance"
+                        type="hidden"
+                        value="<%=game.attendance%>"
+                      />
+                      <input
+                        name="overTime"
+                        type="hidden"
+                        value="<%=game.overTime%>"
+                      />
+                      <button
+                        type="submit"
+                        class="btn btn-secondary btn-sm mt-2"
+                      >
+                        Edit Results
+                      </button>
+                    </form>
+                  </div>
+                  <div class="col-6">
+                    <form action="/games/deleteGame" method="post">
+                      <input
+                        name="gameID"
+                        type="hidden"
+                        value="<%=game._id%>"
+                      />
+                      <button type="submit" class="btn btn-danger btn-sm mt-2">
+                        Delete Game
+                      </button>
+                    </form>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          <% } )%>
         </div>
       </div>
     </div>

@@ -1,3 +1,5 @@
+<!-- MICHAEL CHANG -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,8 +13,8 @@
       crossorigin="anonymous"
     />
     <title>
-      Edit <%=gameObjectFromDB.homeAbbreviation%> VS.
-      <%=gameObjectFromDB.awayAbbreviation%>
+      Edit <%=gameObjectFromDB.homeTeam.abbreviation%> VS.
+      <%=gameObjectFromDB.awayTeam.abbreviation%>
     </title>
   </head>
   <body>
@@ -36,39 +38,92 @@
             <form action="/editGame/editGameUpdate" method="post">
               <div class="homeAwayContainer m-5">
                 <div class="card m-2">
-                  Home Team: <%=gameObjectFromDB.homeAbbreviation%> -
-                  <%=gameObjectFromDB.homeName%>
+                  Home Team: <%=gameObjectFromDB.homeTeam.abbreviation%> -
+                  <%=gameObjectFromDB.homeTeam.teamName%>
                 </div>
                 <div class="card m-2">
-                  Away Team: <%=gameObjectFromDB.awayAbbreviation%> -
-                  <%=gameObjectFromDB.awayName%>
+                  Away Team: <%=gameObjectFromDB.awayTeam.abbreviation%> -
+                  <%=gameObjectFromDB.awayTeam.teamName%>
                 </div>
               </div>
               <div class="winLoseContainer m-5">
                 <label for="winTeam">Choose win team:</label>
                 <select name="winTeam" id="winTeam">
                   <option value="">Please choose a winner</option>
-                  <option value="<%=gameObjectFromDB.homeTeam%>">
-                    <%=gameObjectFromDB.homeAbbreviation%> -
-                    <%=gameObjectFromDB.homeName%>
+                  <option value="<%=gameObjectFromDB.homeTeam.abbreviation%>">
+                    <%=gameObjectFromDB.homeTeam.abbreviation%> -
+                    <%=gameObjectFromDB.homeTeam.teamName%>
                   </option>
-                  <option value="<%=gameObjectFromDB.awayTeam%>">
-                    <%=gameObjectFromDB.awayAbbreviation%> -
-                    <%=gameObjectFromDB.awayName%>
+                  <option value="<%=gameObjectFromDB.awayTeam.abbreviation%>">
+                    <%=gameObjectFromDB.awayTeam.abbreviation%> -
+                    <%=gameObjectFromDB.awayTeam.teamName%>
                   </option>
                 </select>
                 <label for="loseTeam">Choose lose team:</label>
                 <select name="loseTeam" id="loseTeam">
                   <option value="">Please choose a loser</option>
-                  <option value="<%=gameObjectFromDB.homeTeam%>">
-                    <%=gameObjectFromDB.homeAbbreviation%> -
-                    <%=gameObjectFromDB.homeName%>
+                  <option value="<%=gameObjectFromDB.homeTeam.abbreviation%>">
+                    <%=gameObjectFromDB.homeTeam.abbreviation%> -
+                    <%=gameObjectFromDB.homeTeam.teamName%>
                   </option>
-                  <option value="<%=gameObjectFromDB.awayTeam%>">
-                    <%=gameObjectFromDB.awayAbbreviation%> -
-                    <%=gameObjectFromDB.awayName%>
+                  <option value="<%=gameObjectFromDB.awayTeam.abbreviation%>">
+                    <%=gameObjectFromDB.awayTeam.abbreviation%> -
+                    <%=gameObjectFromDB.awayTeam.teamName%>
                   </option>
                 </select>
+                <div>
+                  <label for="homeTeamPoints">Home Team Points</label>
+                  <input
+                    name="homeTeamPoints"
+                    type="number"
+                    placeholder="100"
+                    required
+                    value=""
+                  />
+                  <label for="awayTeamPoints">Away Team Points</label>
+                  <input
+                    name="awayTeamPoints"
+                    type="number"
+                    placeholder="100"
+                    required
+                    value=""
+                  />
+                </div>
+                <div>
+                  <label for="winTeamPoints">Win Team Points</label>
+                  <input
+                    name="winTeamPoints"
+                    type="number"
+                    placeholder="100"
+                    required
+                    value=""
+                  />
+                  <label for="loseTeamPoints">Lose Team Points</label>
+                  <input
+                    name="loseTeamPoints"
+                    type="number"
+                    placeholder="100"
+                    required
+                    value=""
+                  />
+                </div>
+                <div>
+                  <label for="attendance">Attendance</label>
+                  <input
+                    name="attendance"
+                    type="number"
+                    placeholder="15000"
+                    required
+                    value=""
+                  />
+                  <label for="overTime">Overtime?</label>
+                  <input
+                    name="overTime"
+                    type="text"
+                    placeholder="OT/2OT/3OT/etc."
+                    value=""
+                  />
+                </div>
                 <input
                   name="gameID"
                   type="hidden"

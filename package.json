@@ -1,9 +1,13 @@
 {
   "name": "nbadatabasemongodb",
+  "author": "Michael Chang & Daniel Lisko",
+  "license": "MIT",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./node_modules/nodemon/bin/nodemon.js ./bin/www"
+    "michaelQueries": "node ./database/nbaDBMongoQueries.js",
+    "danielQueries": "node ./database/dbQuery.js",
+    "start": "mongorestore && npm run michaelQueries && npm run danielQueries && node ./node_modules/nodemon/bin/nodemon.js ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

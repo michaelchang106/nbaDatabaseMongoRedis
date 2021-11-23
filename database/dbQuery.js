@@ -1,3 +1,5 @@
+//DANIEL LISKO
+
 const { MongoClient } = require("mongodb");
 
 //Helper function to connec to the database and collection locally

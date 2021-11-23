@@ -1,3 +1,5 @@
+//MICHAEL CHANG
+
 const { MongoClient } = require("mongodb");
 // ----------------------------- DATABASE CONNECTION -----------------------------
 //This connects to the collections
@@ -14,12 +16,10 @@ const collectionConnect = async (documents) => {
 
   //Connect to db
   await client.connect();
-  console.log("Connected to server");
 
   //Connect to collection
   const db = await client.db(dbName);
   const collection = await db.collection(documents);
-  console.log("collection => ", documents);
 
   return { collection, client };
 };
