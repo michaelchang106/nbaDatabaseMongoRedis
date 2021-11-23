@@ -50,10 +50,10 @@
                 </div>
                 <div class="card-text">
                   <p class="card-text">
-                    <strong>Height: </strong> <%= Math.floor(f.height / 12)%>'
-                    <%= f.height % 12%>"
+                    <strong>Height: </strong> <%= Math.floor(f.attributes.height / 12)%>'
+                    <%= f.attributes.height % 12%>"
                   </p>
-                  <p><strong>Weight:</strong> <%= f.weight %> lbs</p>
+                  <p><strong>Weight:</strong> <%= f.attributes.weight %> lbs</p>
                   <p><strong>Jersey Number:</strong> <%= f. jerseyNum%></p>
                   <p><strong>Position:</strong> <%= f.positionDesc %></p>
                 </div>
@@ -64,15 +64,11 @@
                     <form action="/employees/deleteEmployee" method="POST">
                       <input
                         type="hidden"
-                        name="employeeID"
-                        value="<%= f.employeeID%>"
+                        name="_id"
+                        value="<%= f._id%>"
                       />
-                      <input
-                        type="hidden"
-                        name="playerID"
-                        value="<%= f.playerID%>"
-                      />
-                      <input type="hidden" name="team" value="<%= f.name%>" />
+            
+                      <input type="hidden" name="team" value="<%= f.team.teamName%>" />
                       <button type="submit" class="btn btn-primary">
                         Delete
                       </button>
@@ -82,11 +78,11 @@
                   <!-- Edit Player -->
                   <div class="d-flex justify-content-start col-6">
                     <form action="/employees/edit" method="POST">
-                      <input type="hidden" name="team" value="<%= team%>" />
+                      <input type="hidden" name="team" value="<%= f.team%>" />
                       <input
                         type="hidden"
-                        name="employeeID"
-                        value="<%= f.employeeID%>"
+                        name="_id"
+                        value="<%= f._id%>"
                       />
                       <input
                         type="hidden"
@@ -106,7 +102,7 @@
                       <input
                         type="hidden"
                         name="weight"
-                        value="<%= f.weight%>"
+                        value="<%= f.attributes.weight%>"
                       />
                       <button type="submit" class="btn btn-primary">
                         Edit Player
@@ -155,7 +151,6 @@
           <h5>Add a New Player to the <%= team %></h5>
           <form action="/employees/player/create" method="POST">
             <input type="hidden" name="team" value="<%=team%>" />
-            <!-- Use this to get teamID-->
             <div>
               <label class="form-label"
                 >First Name:
@@ -221,10 +216,10 @@
             <div>
               <label class="form-label"
                 >Choose One:
-                <select name="positionID">
-                  <option value="1">Guard</option>
-                  <option value="2">Forward</option>
-                  <option value="3">Center</option>
+                <select name="positionDesc">
+                  <option value="G">Guard</option>
+                  <option value="F">Forward</option>
+                  <option value="C">Center</option>
                 </select></label
               >
             </div>
