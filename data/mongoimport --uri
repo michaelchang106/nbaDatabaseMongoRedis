@@ -1,0 +1,4 @@
+mongoimport --uri 
+mongodb+srv://local --collection <COLLECTION> --type json --file <FILENAME>
+
+mongoimport -h localhost:27017 -d nbaDatabase -c employees --file ieeevis2020Tweets.dump
