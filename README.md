@@ -1,6 +1,6 @@
 # nbaDatabase - Authors [Daniel Lisko](https://github.com/djlisko01) and [Michael Chang](https://github.com/michaelchang106)
 
-NBA database for DBMS Project 2 - CS 5200
+## NBA database for DBMS Project 2 - CS 5200
 
 ## Business Requirements and Logical/Conceptual Models
 
