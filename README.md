@@ -36,6 +36,8 @@
 - Download the code to your preferred directory
 - Open that directory with your preferred terminal
 - type "npm install" and hit enter
+
+### Load Database and data with mongorestore / mongodump
 - [follow guide to install mongo](https://docs.mongodb.com/manual/tutorial/manage-mongodb-processes/)
 - TLDR:
   - "brew tap mongodb/brew"
@@ -43,9 +45,13 @@
   - "brew services start mongodb-community@5.0"
 - type "npm start" and hit enter
   - mongoDB data should be restored using "mongorestore", if failed, type "mongorestore" manually in terminal
+
+### Demonstrative queries against the mongoDB
 - Michael's 5-6 mongo queries will run into the terminal. can read results in terminal and browse code located [in the databse folder](./database/nbaDBMongoQueries.js)
   - queries should run automatically, if not type "npm run michaelQueries", can type manually if you want to see the output again"
 - Daniel's 5-6 mongo queries will run into the terminal. can read results in terminal and browse code located [in the databse folder](./database/dbQuery.js)
   - queries should run automatically, if not type "npm run danielQueries", can type manually if you want to see the output again"
+
+### User interface to perform CRUD operations on the mongoDB
 - navigate to "http://localhost:3000/" in your preferred browser
 - use our developed interface to perform CRUD operations on the Employees -> Players & Coaches, and Games Tables
