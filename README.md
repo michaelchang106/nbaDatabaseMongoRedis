@@ -37,7 +37,7 @@
 - Open that directory with your preferred terminal
 - type "npm install" and hit enter
 
-### Load Database and data with mongorestore / mongodump
+### Load Database and data with mongorestore / mongodump & start node-express server
 - [follow guide to install mongo](https://docs.mongodb.com/manual/tutorial/manage-mongodb-processes/)
 - TLDR:
   - "brew tap mongodb/brew"
