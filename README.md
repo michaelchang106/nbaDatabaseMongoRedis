@@ -16,7 +16,7 @@
 
 ### Heirarchal Model
 
-![Heirarchal Model](https://raw.githubusercontent.com/djlisko01/nbaDatabaseMongoDB/main/public/images/Heirarchal_Model_screen_shots.png)
+![Heirarchal Model](https://raw.githubusercontent.com/djlisko01/nbaDatabaseMongoDB/main/public/images/Heirarchal_Model_screen_shot.png)
 
 [NBA-HeiarchalTables-JSON-Examples](./BusReq_Heirarchal_tables/NBA-HeiarchalTables-JSON-Examples.pdf)
 
