@@ -16,17 +16,16 @@ router.get("/team/:name", async (req, res) => {
   const team = req.params.name;
   const players = await myDB.getTeamPlayers(team);
 
-  const coach = await myDB.getCoach(team);
+  console.log("HERE!!!!!!", players);
 
+  const coach = await myDB.getCoach(team);
   res.render("teams", { players: players, team: team, coach: coach });
 });
 
 router.post("/edit", async (req, res) => {
   let editing = req.body;
-
-  editing = await JSON.parse(JSON.stringify(editing));
-  console.log("Editing=================: ", editing.team.toString());
-  res.render("edit", { player: editing });
+  console.log("EDITING", editing);
+  res.render("edit", { player: editing, team: editing.team });
 });
 
 router.post("/deleteEmployee", async (req, res) => {
@@ -38,9 +37,8 @@ router.post("/deleteEmployee", async (req, res) => {
 
 router.post("/submitEdit", async (req, res) => {
   const player = req.body;
-  console.log("Submitting for edit", player.firstName);
+  console.log("Submitting for edit", player);
   await myDB.editPlayer(player);
-  console.log("EDITS", player.team);
   res.redirect(`/employees/team/${player.team}`);
 });
 
