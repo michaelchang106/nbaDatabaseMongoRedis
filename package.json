@@ -1,13 +1,11 @@
 {
-  "name": "nbadatabasemongodb",
+  "name": "nbadatabasemongoredis",
   "author": "Michael Chang & Daniel Lisko",
   "license": "MIT",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "michaelQueries": "node ./database/nbaDBMongoQueries.js",
-    "danielQueries": "node ./database/dbQuery.js",
-    "start": "mongorestore && npm run michaelQueries && npm run danielQueries && node ./node_modules/nodemon/bin/nodemon.js ./bin/www"
+    "start": "mongorestore && node ./node_modules/nodemon/bin/nodemon.js ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -15,13 +13,14 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "mongodb": "^4.2.0",
     "morgan": "~1.9.1",
-    "mongodb": "^4.2.0"
+    "redis": "^4.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15",
-    "prettier": "^2.4.1",
     "eslint": "^8.3.0",
-    "eslint-config-prettier": "^8.3.0"
+    "eslint-config-prettier": "^8.3.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.4.1"
   }
 }
