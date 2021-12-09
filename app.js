@@ -6,8 +6,10 @@ const logger = require("morgan");
 
 const gamesRouter = require("./routes/games");
 const editGameRouter = require("./routes/editGame");
+const editTeamStatsRouter = require("./routes/editTeamStats");
 const indexRouter = require("./routes/index");
-const employeesRouter = require("../nbaDatabaseMongoDB/routes/employees.js");
+const employeesRouter = require("../nbaDatabaseMongoRedis/routes/employees.js");
+const teamStatsRouter = require("./routes/teamStats");
 
 const app = express();
 
@@ -25,7 +27,9 @@ app.use("/", indexRouter);
 
 app.use("/games", gamesRouter);
 app.use("/editGame", editGameRouter);
+app.use("/editTeamStats", editTeamStatsRouter);
 app.use("/employees", employeesRouter);
+app.use("/teamStats", teamStatsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

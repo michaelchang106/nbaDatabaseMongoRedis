@@ -12,7 +12,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <title>NBA Games</title>
+    <title>Edit Team Stats</title>
   </head>
   <body>
     <div class="wrapper">
@@ -36,12 +36,12 @@
           >
         </nav>
 
-        <h1>NBA GAMES CRUD</h1>
+        <h1>Edit Team Stats CRUD</h1>
         <!-- filter by game by Team or Date -->
         <div class="row m-3 box border border-dark">
           <h2>FILTER BY GAME</h2>
           <div class="col">
-            <form action="/games/filterBy" method="post">
+            <form action="/teamStats/filterBy" method="post">
               <label for="teamID">Choose a Team:</label>
               <select name="teamID" id="teamID">
                 <% if(current.selectedTeam !== null){ %>
@@ -73,43 +73,9 @@
           </div>
         </div>
 
-        <!-- create a new Game -->
-        <div class="row m-3 box border border-dark">
-          <h2>ADD A GAME</h2>
-          <div class="col">
-            <form action="/games/insertGame" method="post">
-              <label for="homeTeam">Choose a Home Team:</label>
-              <select name="homeTeam" id="homeTeam">
-                <% teams.forEach((team) => { %>
-                <option value="<%=team.abbreviation%>">
-                  <%=team.abbreviation%> - <%=team.teamName%>
-                </option>
-                <% }) %>
-              </select>
+        <!-- reset the filters -->
+        <a href="/teamStats">Refresh Games/Reset Filters</a>
 
-              <label for="awayTeam">Choose an Away Team:</label>
-              <select name="awayTeam" id="awayTeam">
-                <% teams.forEach((team) => { %>
-                <option value="<%=team.abbreviation%>">
-                  <%=team.abbreviation%> - <%=team.teamName%>
-                </option>
-                <% }) %>
-              </select>
-              <label for="date">Date of game:</label>
-              <input
-                name="date"
-                type="text"
-                placeholder="mm/dd/yyyy"
-                id="date"
-                min="10-19-2021"
-                max="06-30-2022"
-                required
-              />
-              <button type="submit" class="btn btn-primary">Add</button>
-            </form>
-          </div>
-        </div>
-        <a href="/games">Refresh Games/Reset Filters</a>
         <!-- render the cards for the games -->
         <div class="row">
           <div class="m-2">
@@ -161,7 +127,7 @@
 
                 <div class="row">
                   <div class="col-6">
-                    <form action="/editGame" method="post">
+                    <form action="/editTeamStats" method="post">
                       <input
                         name="gameID"
                         type="hidden"
@@ -203,33 +169,11 @@
                         type="hidden"
                         value="<%=game.loseTeamPoints%>"
                       />
-                      <input
-                        name="attendance"
-                        type="hidden"
-                        value="<%=game.attendance%>"
-                      />
-                      <input
-                        name="overTime"
-                        type="hidden"
-                        value="<%=game.overTime%>"
-                      />
                       <button
                         type="submit"
                         class="btn btn-secondary btn-sm mt-2"
                       >
-                        Edit Results
-                      </button>
-                    </form>
-                  </div>
-                  <div class="col-6">
-                    <form action="/games/deleteGame" method="post">
-                      <input
-                        name="gameID"
-                        type="hidden"
-                        value="<%=game._id%>"
-                      />
-                      <button type="submit" class="btn btn-danger btn-sm mt-2">
-                        Delete Game
+                        Edit Team Stats
                       </button>
                     </form>
                   </div>

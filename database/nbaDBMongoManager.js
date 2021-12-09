@@ -304,6 +304,34 @@ async function updateGameResult(
   }
 }
 
+async function updateGameStats(homeTeamStats, awayTeamStats) {
+  let connectedCollection;
+
+  try {
+    connectedCollection = await collectionConnect("Games");
+    const collection = await connectedCollection.collection;
+
+    const insertObject = {
+      $set: {
+        teamStats: {
+          homeTeamStats: homeTeamStats,
+          awayTeamStats: awayTeamStats,
+        },
+      },
+    };
+
+    await collection.findOneAndUpdate(
+      { _id: new ObjectId(homeTeamStats.gameID) },
+      insertObject,
+      { upsert: true }
+    );
+  } catch (error) {
+    console.log(error);
+  } finally {
+    await connectedCollection.client.close();
+  }
+}
+
 module.exports.getGames = getGames;
 module.exports.getSingleGame = getSingleGame;
 module.exports.getTeams = getTeams;
@@ -316,3 +344,4 @@ module.exports.getAllDates = getAllDates;
 module.exports.insertGame = insertGame;
 module.exports.getSingleTeam = getSingleTeam;
 module.exports.updateGameResult = updateGameResult;
+module.exports.updateGameStats = updateGameStats;
