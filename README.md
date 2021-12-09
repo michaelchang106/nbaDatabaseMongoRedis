@@ -1,6 +1,6 @@
 # nbaDatabase - Authors [Daniel Lisko](https://github.com/djlisko01) and [Michael Chang](https://github.com/michaelchang106)
 
-## NBA database for DBMS Project 2 - CS 5200
+## NBA database for DBMS Project 3 - CS 5200
 
 ## Business Requirements and Logical/Conceptual Models
 
@@ -16,22 +16,22 @@
 
 ### Heirarchal Model
 
-![Heirarchal Model](https://raw.githubusercontent.com/djlisko01/nbaDatabaseMongoRedis/main/public/images/Heirarchal_Model_screen_shot.png)
-
-[NBA-HeiarchalTables-JSON-Examples](./BusReq_Heirarchal_tables/NBA-HeiarchalTables-JSON-Examples.pdf)
-
 [Heirarchal Model Lucid Chart](https://lucid.app/lucidchart/e3295927-79f1-4176-bfd1-29a7fae585fe/edit?viewport_loc=-3080%2C-56%2C3328%2C1400%2C0_0&invitationId=inv_60206c0a-d083-4538-a24a-087f8aac8f4d)
 
-### NOTE: Heirarchal Model refactored from Logical model
-[Logical Model Lucid Chart](https://lucid.app/lucidchart/f8b731fe-7480-4e96-b786-84ca747ef028/edit?viewport_loc=-303%2C16%2C2219%2C1012%2C0_0&invitationId=inv_b1efe1a2-5c17-497c-80c0-568e9ae0d801)
+### In-Memory Data Structure
+![In Memory Data Structure](./BusReq_Heirarchal_tables/In_Memory_Data_Structure.png)
+
+[In-Memory Data Structure PDF](./BusReq_Heirarchal_tables/In_Memory_Data_Structure.pdf)
+
+[In-Memory Data Structure Lucid Chart](https://lucid.app/lucidchart/38269d65-a1f8-4014-9d74-8b90e225a611/edit?viewport_loc=-183%2C-61%2C2219%2C999%2C0_0&invitationId=inv_4ccc9d73-d882-4d47-81a1-9a3ba49941f4)
 
 ## Division of works and tasks
 
 ### Both team members collaborated and contributed evenly on the design and implementation of the database with MongoDB, LucidChart, and Google Suite
 
-### [Michael Chang](https://github.com/michaelchang106) created the CRUD Operations and interface for Games table and developed the 5-6 queries on the Games Collection.
+### [Michael Chang](https://github.com/michaelchang106) created the CRUD Operations and interface for Real Time Team Stats tracking by Game.
 
-### [Daniel Lisko](https://github.com/djlisko01) created the CRUD Operations and interface for Players table (and inherently Employees) and developed the 5-6 queries on the Employees Collection.
+### [Daniel Lisko](https://github.com/djlisko01) created the CRUD Operations and interface for Real Time Player Stats tracking.
 
 ## Execution of project
 
@@ -48,12 +48,14 @@
 - type "npm start" and hit enter
   - mongoDB data should be restored using "mongorestore", if failed, type "mongorestore" manually in terminal
 
-### Demonstrative queries against the mongoDB
-- Michael's 5-6 mongo queries will run into the terminal. can read results in terminal and browse code located [in the databse folder](./database/nbaDBMongoQueries.js)
-  - queries should run automatically, if not type "npm run michaelQueries", can type manually if you want to see the output again"
-- Daniel's 5-6 mongo queries will run into the terminal. can read results in terminal and browse code located [in the databse folder](./database/dbQuery.js)
-  - queries should run automatically, if not type "npm run danielQueries", can type manually if you want to see the output again"
+### Load In Memory Database with [dump.rdb](./dump/dump.rdb)
+- [follow guide to install redis](https://medium.com/@petehouston/install-and-config-redis-on-mac-os-x-via-homebrew-eb8df9a4f298)
+- TLDR:
+  - "brew install redis"
+  - copy [dump.rdb](./dump/dump.rdb) to your Redis directory
+    - find your Redis directory by typing "redis-cli config get dir"
+  - type "redis-server" to start server on localhost:6739
 
-### User interface to perform CRUD operations on the mongoDB
+### User interface to perform CRUD operations on the Redis DB
 - navigate to "http://localhost:3000/" in your preferred browser
-- use our developed interface to perform CRUD operations on the Employees -> Players & Coaches, and Games Tables
+- use our developed interface to perform CRUD operations on the Team stats by Game or Player stats
