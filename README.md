@@ -15,6 +15,9 @@
 [Conceptual Model Lucid Chart](https://lucid.app/lucidchart/728904b6-3eac-41ee-9c80-cc89d811dc4c/edit?viewport_loc=-449%2C-71%2C3131%2C1496%2C0_0&invitationId=inv_bc674f57-3cb0-483b-8c06-247711741271)
 
 ### Heirarchal Model
+![Heirarchal Model](./BusReq_Heirarchal_tables/NBA-HeiarchalTables-JSON-Examples.png)
+
+[Heirarchal Model PDF](./BusReq_Heirarchal_tables/NBA-HeiarchalTables-JSON-Examples.pdf)
 
 [Heirarchal Model Lucid Chart](https://lucid.app/lucidchart/e3295927-79f1-4176-bfd1-29a7fae585fe/edit?viewport_loc=-3080%2C-56%2C3328%2C1400%2C0_0&invitationId=inv_60206c0a-d083-4538-a24a-087f8aac8f4d)
 
