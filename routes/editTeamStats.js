@@ -65,6 +65,7 @@ router.get(
   "/games/:gameID/:homeOrAway/:action",
   async function (req, res, next) {
     try {
+      console.log("HERE");
       const gameID = req.params.gameID;
       const homeOrAway = req.params.homeOrAway;
       const action = req.params.action;

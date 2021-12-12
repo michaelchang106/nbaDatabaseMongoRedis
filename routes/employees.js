@@ -16,8 +16,6 @@ router.get("/team/:name", async (req, res) => {
   const team = req.params.name;
   const players = await myDB.getTeamPlayers(team);
 
-  console.log("HERE!!!!!!", players);
-
   const coach = await myDB.getCoach(team);
   res.render("teams", { players: players, team: team, coach: coach });
 });

@@ -10,6 +10,7 @@ const editTeamStatsRouter = require("./routes/editTeamStats");
 const indexRouter = require("./routes/index");
 const employeesRouter = require("../nbaDatabaseMongoRedis/routes/employees.js");
 const teamStatsRouter = require("./routes/teamStats");
+const playersStats = require("../nbaDatabaseMongoRedis/routes/playersStats.js");
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use("/editGame", editGameRouter);
 app.use("/editTeamStats", editTeamStatsRouter);
 app.use("/employees", employeesRouter);
 app.use("/teamStats", teamStatsRouter);
+app.use("/playersStats", playersStats);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

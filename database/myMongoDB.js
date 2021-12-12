@@ -206,9 +206,161 @@ async function editPlayer(player) {
   }
 }
 
+// ------------ Added to Redis Game Edit ------------------- //
+async function getGames(teamName) {
+  let connectedCollection;
+  try {
+    connectedCollection = await collectionConnect("Games");
+    const collection = await connectedCollection.collection;
+
+    const agg = [
+      {
+        $match: {
+          $or: [
+            {
+              "awayTeam.teamName": `${teamName}`,
+            },
+            {
+              "homeTeam.teamName": `${teamName}`,
+            },
+          ],
+        },
+      },
+      {
+        $addFields: {
+          homeTeam: "$homeTeam.teamName",
+          awayTeam: "$awayTeam.teamName",
+        },
+      },
+      {
+        $project: {
+          homeTeam: 1,
+          homeTeamPoints: 1,
+          awayTeam: 1,
+          date: 1,
+          awayTeamPoints: 1,
+        },
+      },
+    ];
+
+    const res = await collection.aggregate(agg).toArray();
+    return res;
+  } catch (e) {
+    console.log(e);
+  } finally {
+    await connectedCollection.client.close();
+  }
+}
+
+async function getSingleGame(gameID) {
+  let connectedCollection;
+  try {
+    connectedCollection = await collectionConnect("Games");
+    const collection = await connectedCollection.collection;
+
+    //Can't de-bug why this find is not working.....
+    const res = await collection.findOne({ _id: ObjectId(gameID) });
+    return res;
+  } catch (error) {
+    console.log(error);
+  } finally {
+    await connectedCollection.client.close();
+  }
+}
+
+async function getGamePlayers(homeTeam, awayTeam) {
+  let connectedCollection;
+  try {
+    connectedCollection = await collectionConnect("Employees");
+    const collection = await connectedCollection.collection;
+
+    const filter = {
+      $and: [
+        {
+          $or: [
+            {
+              "team.teamName": homeTeam,
+            },
+            {
+              "team.teamName": awayTeam,
+            },
+          ],
+        },
+        {
+          employeeType: "player",
+        },
+      ],
+    };
+    //Can't de-bug why this find is not working.....
+    const res = await collection.find(filter).toArray();
+    return res;
+  } catch (error) {
+    console.log(error);
+  } finally {
+    await connectedCollection.client.close();
+  }
+}
+
+const updateGame = async (results) => {
+  console.log("---->", results);
+  let connectedCollection;
+  let game = await getSingleGame(results.gameID);
+  let homeScore = null;
+  let awayScore = null;
+  if (results.homeScore !== null) {
+    homeScore = Number(results.homeScore);
+    awayScore = Number(results.awayScore);
+  }
+
+  game.homeTeamPoints = homeScore;
+  game.awayTeamPoints = awayScore;
+
+  if (homeScore > awayScore) {
+    game.winTeamPoints = homeScore;
+    game.winTeam = game.homeTeam;
+    game.loseTeamPoints = awayScore;
+    game.loseTeam = game.awayTeam;
+  } else {
+    game.winTeamPoints = awayScore;
+    game.winTeam = game.awayTeam;
+    game.loseTeamPoints = homeScore;
+    game.loseTeam = game.homeTeam;
+  }
+  //Simulate attendance
+  if (game.attendance === null) {
+    game.attendance = Math.floor(Math.random() * 15000) + 15000;
+  }
+
+  if (homeScore === null) {
+    game.winTeam = null;
+    game.loseTeam = null;
+    game.attendance = null;
+  }
+
+  console.log("GAMES---->", game);
+
+  try {
+    connectedCollection = await collectionConnect("Games");
+    const collection = await connectedCollection.collection;
+    const res = await collection.replaceOne(
+      { _id: new ObjectId(results.gameID) },
+      game
+    );
+    console.log("REPLACE", res);
+  } catch (e) {
+    console.log(e);
+  } finally {
+    await connectedCollection.client.close();
+  }
+};
+
 module.exports.getTeamPlayers = getTeamPlayers;
 module.exports.getTeams = getTeams;
 module.exports.getCoach = getCoach;
 module.exports.createNewEmployee = createNewEmployee;
 module.exports.deletePlayer = deletePlayer;
 module.exports.editPlayer = editPlayer;
+module.exports.getGames = getGames;
+module.exports.getSingleGame = getSingleGame;
+module.exports.getGamePlayers = getGamePlayers;
+module.exports.updateGame = updateGame;

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="../public/stylesheets/style.css" rel="stylesheet" />
+
+    <title>Live Game</title>
+  </head>
+  <body>
+    <div class="container p-0">
+      <a
+          class="navbar-brand border p-2 bg-primary text-light"
+          href="/employees"
+          >Players CRUD (Daniel Lisko)</a
+        >
+        <a
+          class="navbar-brand border p-2 bg-primary text-light"
+          href="/teamStats"
+          >Team Stats CRUD (Michael Chang)</a
+        >
+        <a
+          class="navbar-brand border p-2 bg-primary text-light"
+          href="/playersStats"
+          >Player Stats CRUD (Daniel Lisko)</a
+        >
+      </nav>
+      <div class="d-flex justify-content-center mt-3">
+        <form action="/playersStats/saveStats/" method="POST">
+          <input type="hidden" name="gameID" value="<%= gameID %>" />
+          <input
+            type="hidden"
+            name="homeScore"
+            value="<%= homeTeam.stats.score%>"
+          />
+          <input
+            type="hidden"
+            name="homeSteals"
+            value="<%= homeTeam.stats.steals%>"
+          />
+          <input
+            type="hidden"
+            name="homeRebounds"
+            value="<%= homeTeam.stats.rebounds%>"
+          />
+          <!-- Away Team Update -->
+          <input
+            type="hidden"
+            name="awayScore"
+            value="<%= awayTeam.stats.score%>"
+          />
+          <input
+            type="hidden"
+            name="awaySteals"
+            value="<%= awayTeam.stats.steals%>"
+          />
+          <input
+            type="hidden"
+            name="awayRebounds"
+            value="<%= awayTeam.stats.rebounds%>"
+          />
+          <button type="submit">SAVE GAME STATS</button>
+        </form>
+        <form action="/playersStats/deleteStats/<%= gameID %>" method="GET">
+          <button type="submit">CLEAR ALL STATS</button>
+        </form>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="row">
+            <h2 id="homeTeam" class="d-flex justify-content-center">
+              <%= homeTeam.teamName%>
+            </h2>
+            <div class="d-flex justify-content-center">
+              <strong>Team Totals -- </strong>
+              <strong
+                >Points: <%= homeTeam.stats.score %> | Steals: <%=
+                homeTeam.stats.steals %> | Rebounds: <%= homeTeam.stats.rebounds
+                %></strong
+              >
+            </div>
+            <div class="d-flex justify-content-center">
+              <strong
+                >Top Scorer -- <%= homeTeam.players[0].firstName %> <%=
+                homeTeam.players[0].lastName %></strong
+              >
+            </div>
+
+            <div class="row text-center m-0 pt-4 p-0">
+              <div class="col-1 p-0"><small>Jersey-#</small></div>
+              <div class="col-10 p-0">
+                <strong>Players</strong> (Sorted by scores)
+              </div>
+            </div>
+            <div class="row">
+              <% homeTeam.players.forEach(function (player) { %>
+              <div class="col-1 pt-5">
+                <strong><%=player.jerseyNum%></strong>
+              </div>
+              <div
+                class="col-11 p-1 mt-2 player-stat"
+                style="border: solid #aaa6a6 0.5px"
+              >
+                <div class="row">
+                  <div class="col-9">
+                    <div>
+                      <strong
+                        ><%=player.firstName%> <%=player.lastName%></strong
+                      >
+                    </div>
+                    <div class="row">
+                      <form
+                        action="/playerStats/game/<%= gameID %>/noStat"
+                        method="GET"
+                      >
+                        <div class="row">
+                          <div class="col-7">
+                            <div class="d-flex justify-content-center">
+                              <span>Point(s) Scored</span>
+                            </div>
+                            <button
+                              type="click"
+                              formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/points/-1"
+                            >
+                              -</button
+                            ><span class="m-1"> 1 </span>
+                            <button
+                              type="click"
+                              value="1"
+                              formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/points/1"
+                            >
+                              +
+                            </button>
+                            <button
+                              type="click"
+                              value="-2"
+                              class="ms-2"
+                              formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/points/-2"
+                            >
+                              -</button
+                            ><span class="m-1"> 2 </span>
+                            <button
+                              type="click"
+                              value="2"
+                              class="me-2"
+                              formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/points/2"
+                            >
+                              +
+                            </button>
+                            <button
+                              type="click"
+                              formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/points/-3"
+                            >
+                              -</button
+                            ><span class="m-1"> 3 </span>
+                            <button
+                              type="click"
+                              formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/points/3"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <div class="col-2">
+                            <div class="d-flex justify-content-center">
+                              <span>Steal</span>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                              <button
+                                type="click"
+                                formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/steals/-1"
+                              >
+                                -</button
+                              ><span class="m-1"> 1 </span>
+                              <button
+                                type="click"
+                                formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/steals/1"
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
+                          <div class="col-3">
+                            <div>
+                              <span>Rebound</span>
+                            </div>
+                            <button
+                              type="click"
+                              formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/rebounds/-1"
+                            >
+                              -</button
+                            ><span class="m-1"> 1 </span>
+                            <button
+                              type="click"
+                              formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/rebounds/1"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="col-2 p-0 m-0">
+                    <div class="row">
+                      <div class="pe-0 m-0">
+                        <strong>Points:</strong> <%=player.stats.points %>
+                      </div>
+                      <div class="pe-0 m-0">
+                        <strong>Steals: </strong> <%=player.stats.steals %>
+                      </div>
+                      <div class="pe-0 m-0">
+                        <strong>Rebounds:</strong> <%=player.stats.rebounds %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <%})%>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <h2 id="awayTeam" class="d-flex justify-content-center">
+              <%= awayTeam.teamName%>
+            </h2>
+            <div class="d-flex justify-content-center">
+              <strong>Team Totals -- </strong>
+              <strong
+                >Points: <%= awayTeam.stats.score %> | Steals: <%=
+                awayTeam.stats.steals %> | Rebounds: <%= awayTeam.stats.rebounds
+                %></strong
+              >
+            </div>
+            <div class="d-flex justify-content-center">
+              <strong
+                >Top Scorer -- <%= awayTeam.players[0].firstName %> <%=
+                awayTeam.players[0].lastName %></strong
+              >
+            </div>
+            <div class="row text-center m-0 pt-4 p-0">
+              <div class="col-1 p-0"><small>Jersey-#</small></div>
+              <div class="col-10 p-0">
+                <strong>Players</strong> (Sorted by scores)
+              </div>
+            </div>
+            <div class="row">
+              <% awayTeam.players.forEach(function (player) { %>
+              <div class="col-1 pt-5">
+                <strong><%=player.jerseyNum%></strong>
+              </div>
+              <div
+                class="col-11 p-1 mt-2 player-stat"
+                style="border: solid #aaa6a6 0.5px"
+              >
+                <div class="row">
+                  <div class="col-9">
+                    <div>
+                      <strong
+                        ><%=player.firstName%> <%=player.lastName%></strong
+                      >
+                    </div>
+                    <div class="row">
+                      <form
+                        action="/playerStats/game/<%= gameID %>/noStat"
+                        method="GET"
+                      >
+                        <div class="row">
+                          <div class="col-7">
+                            <div class="d-flex justify-content-center">
+                              <span>Point(s) Scored</span>
+                            </div>
+                            <button
+                              type="click"
+                              formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/points/-1"
+                            >
+                              -</button
+                            ><span class="m-1"> 1 </span>
+                            <button
+                              type="click"
+                              value="1"
+                              formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/points/1"
+                            >
+                              +
+                            </button>
+                            <button
+                              type="click"
+                              value="-2"
+                              class="ms-2"
+                              formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/points/-2"
+                            >
+                              -</button
+                            ><span class="m-1"> 2 </span>
+                            <button
+                              type="click"
+                              value="2"
+                              class="me-2"
+                              formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/points/2"
+                            >
+                              +
+                            </button>
+                            <button
+                              type="click"
+                              formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/points/-3"
+                            >
+                              -</button
+                            ><span class="m-1"> 3 </span>
+                            <button
+                              type="click"
+                              formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/points/3"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <div class="col-2">
+                            <div class="d-flex justify-content-center">
+                              <span>Steal</span>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                              <button
+                                type="click"
+                                formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/steals/-1"
+                              >
+                                -</button
+                              ><span class="m-1"> 1 </span>
+                              <button
+                                type="click"
+                                formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/steals/1"
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
+                          <div class="col-3">
+                            <div>
+                              <span>Rebound</span>
+                            </div>
+                            <button
+                              type="click"
+                              formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/rebounds/-1"
+                            >
+                              -</button
+                            ><span class="m-1"> 1 </span>
+                            <button
+                              type="click"
+                              formaction="/playersStats/game/<%= gameID %>/<%= player.id %>/rebounds/1"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="col-2 p-0 m-0">
+                    <div class="row">
+                      <div class="pe-0 m-0">
+                        <strong>Points:</strong> <%=player.stats.points %>
+                      </div>
+                      <div class="pe-0 m-0">
+                        <strong>Steals: </strong> <%=player.stats.steals %>
+                      </div>
+                      <div class="pe-0 m-0">
+                        <strong>Rebounds:</strong> <%=player.stats.rebounds %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <%})%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+    integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+    crossorigin="anonymous"
+  ></script>
+</html>

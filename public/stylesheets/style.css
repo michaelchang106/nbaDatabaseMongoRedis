@@ -12,3 +12,6 @@ a {
 a:hover {
   background-color: lightblue;
 }
+.player-stat {
+  border: black solid 0.2px;
+}

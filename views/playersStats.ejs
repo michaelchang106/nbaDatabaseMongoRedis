@@ -1,11 +1,9 @@
-<!-- DANIEL LISKO -->
-
+<!-- Daniel Lisko -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Players and Coaches</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="./images/basketball.png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
@@ -17,9 +15,13 @@
       integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
       crossorigin="anonymous"
     ></script>
+    <title>Document</title>
   </head>
+
+  <!-- The body of the Player Stats -->
   <body>
     <div class="container">
+      <!-- NAVIGATION -->
       <nav class="navbar navbar-light bg-light justify-content-start">
         <a class="navbar-brand border p-2 bg-primary text-light" href="/"
           >Home</a
@@ -44,28 +46,20 @@
         >
       </nav>
 
-      <form action="/employees/team>" method="POST">
-        <div class="dropdown">
-          <button
-            class="btn btn-secondary dropdown-toggle"
-            type="submit"
-            id="dropdownMenuButton1"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Select a Team
-          </button>
+      <!-- Form to select a team -->
+      <h2>Select a Team</h2>
+      <div class="row">
+
+        <form action="/playersStats/team" method="GET">
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <% teams.forEach(function (f) { %>
-            <a class="dropdown-item" href="employees/team/<%= f.name %>"
+            <a class="dropdown-item" href="playersStats/team/<%= f.name %>"
               ><%= f.abbreviation %> - <%= f.name %></a
             >
-            <% })%>
           </ul>
-        </div>
-      </form>
+          <% })%>
+        </form>
+      </div>
     </div>
-
-    <!-- Drop down to select a team -->
   </body>
 </html>

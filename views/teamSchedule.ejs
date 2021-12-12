@@ -1,12 +1,10 @@
-<!-- DANIEL LISKO -->
+<!-- Daniel Lisko -->
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Players and Coaches</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="./images/basketball.png" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -17,6 +15,7 @@
       integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
       crossorigin="anonymous"
     ></script>
+    <title>Document</title>
   </head>
   <body>
     <div class="container">
@@ -43,29 +42,32 @@
           >Player Stats CRUD (Daniel Lisko)</a
         >
       </nav>
-
-      <form action="/employees/team>" method="POST">
-        <div class="dropdown">
-          <button
-            class="btn btn-secondary dropdown-toggle"
-            type="submit"
-            id="dropdownMenuButton1"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Select a Team
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <% teams.forEach(function (f) { %>
-            <a class="dropdown-item" href="employees/team/<%= f.name %>"
-              ><%= f.abbreviation %> - <%= f.name %></a
-            >
-            <% })%>
-          </ul>
+      <div class="row">
+        <p>
+          If differences in score. Go back to game you were editing and click
+          "SAVE ALL"
+        </p>
+        <div class="col-2"></div>
+        <div class="col-2"><h4>Date</h4></div>
+        <div class="col-2"><h4>Home Team</h4></div>
+        <div class="col-2"><h4>Points</h4></div>
+        <div class="col-2"><h4>Away Team</h4></div>
+        <div class="col-2"><h4>Points</h4></div>
+        <% games.forEach(function (game) {%>
+        <div class="col-2">
+          <a href="/playersStats/game/<%= game._id %>">Edit Game Stats</a>
         </div>
-      </form>
+        <div class="col-2"><h6><%=game.date%></h6></div>
+        <div class="col-2">
+          <h6><strong><%=game.homeTeam%></strong></h6>
+        </div>
+        <div class="col-2"><h6><%=game.homeTeamPoints%></h6></div>
+        <div class="col-2">
+          <h6><strong><%=game.awayTeam%></strong></h6>
+        </div>
+        <div class="col-2"><h6><%=game.awayTeamPoints%></h6></div>
+        <%})%>
+      </div>
     </div>
-
-    <!-- Drop down to select a team -->
   </body>
 </html>
