@@ -65,7 +65,7 @@
 - Views
   - [playerGameEdits.ejs](./views/playerGameEdits.ejs)
   - [teamSchedule.ejs](./views/teamSchedule.ejs)
-  - [playerStats.js](./views/playerStats.ejs)
+  - [playersStats.ejs](./views/playersStats.ejs)
 
 ## Execution of project
 
