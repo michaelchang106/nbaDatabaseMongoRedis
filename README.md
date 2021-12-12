@@ -60,12 +60,12 @@
 
 - Routes:
 
-  - [/routes/playerStats.js](./routes/playerStats.js)
+  - [playerStats.js](./routes/playersStats.js)
 
 - Views
   - [playerGameEdits.ejs](./views/playerGameEdits.ejs)
   - [teamSchedule.ejs](./views/teamSchedule.ejs)
-  - [playerStats.js](./views/playerStats.js)
+  - [playerStats.js](./views/playerStats.ejs)
 
 ## Execution of project
 
