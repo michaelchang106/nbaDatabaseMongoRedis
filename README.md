@@ -40,15 +40,15 @@
 
 - Database:
 
-  - /database/nbaDBRedisManager.js
+  - [nbaDBRedisManager.js](./database/nbaDBRedisManager.js)
 
 - Routes:
 
-  - /routes/editTeamStats.js
+  - [editTeamStats.js](./routes/editTeamStats.js)
 
 - Views
-  - /views/teamStats.ejs
-  - /views/editTeamStats.ejs
+  - [teamStats.ejs](./views/teamStats.ejs)
+  - [editTeamStats.ejs](./views/editTeamStats.ejs)
 
 ### [Daniel Lisko](https://github.com/djlisko01) created the CRUD Operations and interface for Real Time Player Stats tracking.
 
@@ -56,16 +56,16 @@
 
 - Database:
 
-  - /database/myRedisManager.js
+  - [myRedisManager.js](./database/myRedisManager.js)
 
 - Routes:
 
-  - /routes/playerStats.js
+  - [/routes/playerStats.js](./routes/playerStats.js)
 
 - Views
-  - /views/playerGameEdits.ejs
-  - /views/teamSchedule.ejs
-  - /views/playerStats.js
+  - [playerGameEdits.ejs](./views/playerGameEdits.ejs)
+  - [teamSchedule.ejs](./views/teamSchedule.ejs)
+  - [playerStats.js](./views/playerStats.js)
 
 ## Execution of project
 
