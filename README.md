@@ -39,29 +39,33 @@
 #### Files Implemented for Redis:
 
 - Database:
-  -- /database/nbaDBRedisManager.js
+
+  - /database/nbaDBRedisManager.js
 
 - Routes:
-  -- /routes/editTeamStats.js
+
+  - /routes/editTeamStats.js
 
 - Views
-  -- /views/teamStats.ejs
-  -- /views/editTeamStats.ejs
+  - /views/teamStats.ejs
+  - /views/editTeamStats.ejs
 
 ### [Daniel Lisko](https://github.com/djlisko01) created the CRUD Operations and interface for Real Time Player Stats tracking.
 
 #### Files Implemented for Redis:
 
 - Database:
-  -- /database/myRedisManager.js
+
+  - /database/myRedisManager.js
 
 - Routes:
-  -- /routes/playerStats.js
+
+  - /routes/playerStats.js
 
 - Views
-  -- /views/playerGameEdits.ejs
-  -- /views/teamSchedule.ejs
-  -- /views/playerStats.js
+  - /views/playerGameEdits.ejs
+  - /views/teamSchedule.ejs
+  - /views/playerStats.js
 
 ## Execution of project
 
@@ -79,15 +83,15 @@
 - type "npm start" and hit enter
   - mongoDB data should be restored using "mongorestore", if failed, type "mongorestore" manually in terminal
 
-### Start redis and mongo server if they aren't already started
+## Start redis and mongo server if they aren't already started
 
-## To start MongoDB server
+### To start MongoDB server
 
 - Open a terminal and go to the database directory.
 - make a directory called "db/"
 - run mongod --dbpath= db/
 
-## To start Redis server
+### To start Redis server
 
 - In the terminal, redirect to the dump/ directory
 - type redis-server
